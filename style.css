@@ -1,0 +1,15 @@
+.bgimage {
+    background-image: url('./img/imagetable.jpg');
+    height: 100vh;
+    background-color: #cccccc; 
+    height: 1000px; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
