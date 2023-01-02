@@ -18,7 +18,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse " id="navbarColor01">
+    <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto ms-auto fs-3 justify-content-evenly"> <!-- me auto et ms-auto pour centrer l'ul dans la nav bar -->
         <li class="nav-item">
           <a class="nav-link" href="#">Acceuil
@@ -43,22 +43,27 @@
 </nav>
 </header>
 <main>
-<div class="container-fluid p-0"> 
-<div class="bgimage d-flex">
-  <div class="col">
-  <h1 class="text-white fs-1 fw-bold p-3"> Mangez frais et soutenez vos producteurs locaux  </h1>
-  <p class="text-white fs-3"> Commencez par entré une adresse pour voir les points de vente a proximité :   </p>
-  <form class="d-flex bg-secondary p-3 rounded">
-        <input class="form-control me-sm-2" type="search" placeholder="123 rue de l'exemple, Marseille 13000">
-        <button class="btn btn-success my-2 my-sm-0" type="submit">Rechercher</button>
-      </form>
-  </div>
-  <div class="col">
-     <h1 class="text-white fs-1 fw-bold p-3"> Mangez frais et soutenez vos producteurs locaux  </h1>
-  <p class="text-white fs-3"> Commencez par entré une adresse pour voir les points de vente a proximité :   </p>
-    </div>
 
-</div>
+<div class="container-fluid bgimage">
+<div class="row"> 
+  <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center"> <!-- d-flex pour utiliser l'alignement, aligns-center pour centrer les elements enfant(sur axe y) et -->
+    <div class="w-75 m-5"> <!-- cette div permet de regrouper les element de mon contenu en display block (comportement par defaut) pour manipuler les 3 balises en meme temps avec la div parent et les flexbox-->
+    <h1 class="text-white fs-1 fw-bold text-center bg-info rounded text-center"> Mangez frais et soutenez vos producteurs locaux  </h1>
+    <p class="text-white fs-3 text-center"> Commencez par entré une adresse pour voir les points de vente à proximité :   </p>
+    <form class="d-flex rounded ms-5 me-5">
+        <input class="form-control" type="search" placeholder="123 rue de l'exemple, Marseille 13000">
+        <button class="btn btn-success ms-3" type="submit">Rechercher</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6 p-3 d-grid align-items-center">
+  <div class="text-white fs-1 fw-bold m-3 bg-info rounded p-3"> Une envie de produits locaux ? Ou pourquoi ne pas trouver la bonne affaire?</div>
+  <p class="text-white fs-2 m-3 text-center"> Echoppe de marché, foodtruck, Echoppe classique, vous allez trouver votre bonheur !</p>
+  <img class="rounded w-75 img-responsive center-block d-block mx-auto" src="img/legumeechoppe.webp" alt="" srcset="">
+  
+    </div>
+    </div>
+  </div>
 </div>
 
 </main>
