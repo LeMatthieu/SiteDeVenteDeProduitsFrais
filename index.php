@@ -21,12 +21,12 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto ms-auto fs-3 justify-content-evenly"> <!-- me auto et ms-auto pour centrer l'ul dans la nav bar -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Acceuil
+          <a class="nav-link" href="index.php">Acceuil
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Marché</a>
+          <a class="nav-link" href="marche.php">Marché</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Foodtruck</a>
@@ -65,8 +65,43 @@
     </div>
   </div>
 </div>
-
 </main>
+
+
+
+<h3 class="text-center mt-4">Comment ca marche ? </h3>
+<h2 class="text-center fw-bold text-warning"> C'est tres simple ! </h2>
+
+
+
+<div class="container-fluid d-flex mt-5">
+<div class="row">
+<div class="col-12 col-lg-4 mt-5">
+<img class="img-responsive center-block d-block mx-auto"src="img/icons/location.png" alt="">
+<p class="mt-3 fs-3 text-center"> Indiquez votre adresse</p>
+</div>
+
+<div class="col-12  col-lg-4 mt-5">
+<img class="img-responsive center-block d-block mx-auto"src="img/icons/pizza" alt="">
+<p class="mt-3 fs-3 text-center">Faites vous plaisir en choississant un de nos nombreux point de vente </p>
+</div>
+
+<div class="col-12 col-lg-4 mt-5">
+<img class="img-responsive center-block d-block mx-auto"src="img/icons/deal.png" alt="" srcset="">
+<p class="mt-3 fs-3 text-center">Faite une reservation ou contacter directement le propriétaire </p>
+</div>
+</div>
+</div>
+
+<footer>
+  <ul class="d-flex justify-content-around border-top pt-3 list-unstyled fs-6 fs-lg-4">
+    <li>Condition générales d'utilisation </li>
+    <li>Vie privée / cookie</li>
+    <li>Aide</li>
+    <li>Nos engagements</li>
+    <li>Déclaration de confidentialité</li>
+  </ul>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
