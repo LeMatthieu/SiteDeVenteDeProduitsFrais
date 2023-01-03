@@ -10,7 +10,7 @@
   </head>
   <body>
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-row justify-content-end">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-row justify-content-end">
   <div class="container-fluid">
     <a class="navbar-brand fs-2 text-success" href="#">Manger-local
     <img src="img/icons/salad(1).png" alt="" srcset="">
@@ -46,9 +46,9 @@
 
 <div class="container-fluid bgimage">
 <div class="row"> 
-  <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center"> <!-- d-flex pour utiliser l'alignement, aligns-center pour centrer les elements enfant(sur axe y) et -->
+  <div class="col-12 col-md-6 d-flex align-items-center justify-content-center"> <!-- d-flex pour utiliser l'alignement, aligns-center pour centrer les elements enfant(sur axe y) et -->
     <div class="w-75 m-5"> <!-- cette div permet de regrouper les element de mon contenu en display block (comportement par defaut) pour manipuler les 3 balises en meme temps avec la div parent et les flexbox-->
-    <h1 class="text-white fs-1 fw-bold text-center bg-info rounded text-center"> Mangez frais et soutenez vos producteurs locaux  </h1>
+    <h1 class="text-white fs-1 fw-bold text-center bg-warning rounded text-center"> Mangez frais et soutenez vos producteurs locaux  </h1>
     <p class="text-white fs-3 text-center"> Commencez par entré une adresse pour voir les points de vente à proximité :   </p>
     <form class="d-flex rounded ms-5 me-5">
         <input class="form-control" type="search" placeholder="123 rue de l'exemple, Marseille 13000">
@@ -56,8 +56,8 @@
       </form>
     </div>
   </div>
-  <div class="col-12 col-lg-6 p-3 d-grid align-items-center">
-  <div class="text-white fs-1 fw-bold m-3 bg-info rounded p-3"> Une envie de produits locaux ? Ou pourquoi ne pas trouver la bonne affaire?</div>
+  <div class="col-12 col-md-6 p-3 d-grid align-items-center">
+  <div class="text-white fs-1 fw-bold m-3 bg-warning rounded p-3"> Une envie de produits locaux ? Ou pourquoi ne pas trouver la bonne affaire?</div>
   <p class="text-white fs-2 m-3 text-center"> Echoppe de marché, foodtruck, Echoppe classique, vous allez trouver votre bonheur !</p>
   <img class="rounded w-75 img-responsive center-block d-block mx-auto" src="img/legumeechoppe.webp" alt="" srcset="">
   
@@ -76,17 +76,17 @@
 
 <div class="container-fluid d-flex mt-5">
 <div class="row">
-<div class="col-12 col-lg-4 mt-5">
+<div class="col-12 col-md-4 mt-5">
 <img class="img-responsive center-block d-block mx-auto"src="img/icons/location.png" alt="">
 <p class="mt-3 fs-3 text-center"> Indiquez votre adresse</p>
 </div>
 
-<div class="col-12  col-lg-4 mt-5">
+<div class="col-12  col-md-4 mt-5">
 <img class="img-responsive center-block d-block mx-auto"src="img/icons/pizza" alt="">
 <p class="mt-3 fs-3 text-center">Faites vous plaisir en choississant un de nos nombreux point de vente </p>
 </div>
 
-<div class="col-12 col-lg-4 mt-5">
+<div class="col-12 col-md-4 mt-5">
 <img class="img-responsive center-block d-block mx-auto"src="img/icons/deal.png" alt="" srcset="">
 <p class="mt-3 fs-3 text-center">Faite une reservation ou contacter directement le propriétaire </p>
 </div>
@@ -94,7 +94,7 @@
 </div>
 
 <footer>
-  <ul class="d-flex justify-content-around border-top pt-3 list-unstyled fs-6 fs-lg-4">
+  <ul class="d-block d-md-flex justify-content-around border-top pt-3 list-unstyled fs-6 fs-md-4 ms-4 ms-md-0">
     <li>Condition générales d'utilisation </li>
     <li>Vie privée / cookie</li>
     <li>Aide</li>
