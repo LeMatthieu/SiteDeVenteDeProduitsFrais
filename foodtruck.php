@@ -59,22 +59,22 @@
     <div class="carousel-item active">
       <img src="img/foodtruck/foodtruckun.jpeg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5 class="fw-bold fs-3 text-warning">Faite des économies et manger bio</h5>
-        <p class="fs-6 fw-bold ">Grâce aux achats locaux vous pouvez realiser des économies et surtout manger des produits frais et bio acheté directement auprès des producteurs </p>
+        <h5 class="fw-bold fs-3 text-warning">Faite vous plaisir dans un foodtruck à proximité</h5>
+        <p class="fs-6 text-black">Les foodtruck sont des camions restaurant entierement ouvert sur le coté dans lequel à été installée une cuisine</p>
       </div>
     </div>
     <div class="carousel-item ">
       <img src="img/foodtruck/foodtruckdeux.jpeg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5 class="fw-bold fs-3 text-warning">Trouver des produits divers et variées</h5>
-        <p class="fs-6 fw-bold "> Des habits, du fromage, des fruits, faite vous plaisir et trouver votre pepite  </p>
+        <p class="fs-6 fw-bold "> On peux y trouver des pizza, tacos, sandwich panini, il y en a pour tout les goûts </p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/foodtruck/foodtrucktrois.jpeg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5 class="fw-bold fs-3 text-warning">Vous faite un geste pour la planete en économisant des emballages</h5>
-        <p class="fs-6 fw-bold ">Grâce aux achats dans les stands du marché, vous permettait l'économie d'emballage et vous réutiliser des produits qui serait autrement jeté </p>
+        <h5 class="fw-bold fs-3 text-warning">Soutenez les petit commercants locaux</h5>
+        <p class="fs-6 fw-bold text-white">Les foodtrucks sont souvent oublié ou non repertorié sur les différents site/application de livraison, nous allons remedier à ça </p>
       </div>
     </div>
   </div>

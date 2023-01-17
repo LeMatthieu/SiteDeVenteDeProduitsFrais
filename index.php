@@ -29,10 +29,10 @@
           <a class="nav-link" href="marche.php">Marché</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Foodtruck</a>
+          <a class="nav-link" href="foodtruck.php">Foodtruck</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">échoppe</a>
+          <a class="nav-link" href="echoppe.php">échoppe</a>
         </li>
       </ul>
       <form class="d-flex">
