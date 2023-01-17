@@ -213,6 +213,17 @@
 </div>
 </div>
 
+<iframe
+  width="600"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAaM4SM2WBrtuMPhodm-tgH7yHqymNDyw0
+    &q=Space+Needle,Seattle+WA&q">
+</iframe>
+
 <footer>
   <ul class="d-block d-md-flex justify-content-around border-top pt-3 list-unstyled fs-6 fs-md-4 ms-4 ms-md-0">
     <li>Condition générales d'utilisation </li>
