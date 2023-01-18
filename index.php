@@ -65,7 +65,7 @@ require_once('modaleconnexion.php');
 </div>
 </div>
 
-<iframe
+<!-- <iframe
   width="600"
   height="450"
   style="border:0"
@@ -74,7 +74,7 @@ require_once('modaleconnexion.php');
   referrerpolicy="no-referrer-when-downgrade"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAaM4SM2WBrtuMPhodm-tgH7yHqymNDyw0
     &q=Space+Needle,Seattle+WA&q">
-</iframe>
+</iframe> -->
 
 <footer>
 <?php
