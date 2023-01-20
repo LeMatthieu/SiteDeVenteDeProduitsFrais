@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `dbmangerlocal`.`shop` (
   `name` VARCHAR(45) NULL,
   `type` VARCHAR(45) NOT NULL,
   `user_idUser` INT NOT NULL,
-  PRIMARY KEY (`idShop`, `user_idUser`),
+  PRIMARY KEY `idShop`,
   INDEX `fk_shop_user1_idx` (`user_idUser` ASC),
   CONSTRAINT `fk_shop_user1`
     FOREIGN KEY (`user_idUser`)
@@ -141,3 +141,9 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+ALTER TABLE books
+    ADD CONSTRAINT user_idUser
+    FOREIGN KEY (created_by)
+    REFERENCES users(id);

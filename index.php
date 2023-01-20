@@ -50,7 +50,7 @@ include('modaleconnexion.php');
 <div class="row">
 <div class="col-12 col-md-4 mt-5">
 <img class="img-responsive center-block d-block mx-auto"src="img/icons/location.png" alt="">
-<p class="mt-3 fs-3 text-center"> Indiquez votre adresse</p>
+<p class="mt-3 fs-3 text-center"> Cliquer sur "afficher les commerces" </p>
 </div>
 
 <div class="col-12  col-md-4 mt-5">
@@ -65,7 +65,7 @@ include('modaleconnexion.php');
 </div>
 </div>
 
-<!-- <iframe
+<iframe
   width="600"
   height="450"
   style="border:0"
@@ -74,7 +74,7 @@ include('modaleconnexion.php');
   referrerpolicy="no-referrer-when-downgrade"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAaM4SM2WBrtuMPhodm-tgH7yHqymNDyw0
     &q=Space+Needle,Seattle+WA&q">
-</iframe> -->
+</iframe>
 
 <footer>
 <?php

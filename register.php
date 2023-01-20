@@ -78,25 +78,10 @@ if (isset($_POST['register'])) {
     
 
     if (count($errors) == 0) {
-
-        // $queryshopname="INSERT INTO shop (name, type)
-        //                 VALUES('$shopname','$shoptype')";
-
-        // $resultshopname=mysqli_query($db, $queryshopname);
-
-        // if (!$resultshopname) {
-        //   echo("Error description: " . mysqli_error($db));
-        // }
-        
-        
-        
         $query = "INSERT INTO user (firstname, lastname, password, email, adress, city, postalcode, phonenumber, birthdate) 
                   VALUES('$firstname', '$lastname','$password', '$email', '$adress', '$city', '$postalcode', '$phonenumber', '$birthdate');";
         //var_dump( $query);
-
-        
         $result=mysqli_query($db, $query);
-        
       // Perform a query, check for error
       if (!$result) {
       echo("Error description: " . mysqli_error($db));
@@ -122,13 +107,13 @@ if (isset($_POST['register'])) {
        
        $query = "SELECT * FROM user WHERE email='$email' AND password='$password'";
        $results = mysqli_query($db, $query);
-
        if (!$results) {
           echo("Error description: " . mysqli_error($db));
           }
     
        if (mysqli_num_rows($results) == 1) {
          $_SESSION['username'] = $email;
+         $emailogged=$_SESSION['username'];
          $_SESSION['loggedin'] = true;
          header('location:index.php');
        }else {
@@ -142,3 +127,40 @@ if (isset($_POST['register'])) {
     header('location:index.php');
     exit;
   }
+
+// var_dump($_POST['validshopname']);
+
+if (isset($_POST['validshopname'])) {
+  
+  $emailogged=$_SESSION['username']; //associe la variable a l'username de $_session (qui correspond à email)
+  $sqlQuery = "SELECT idUser FROM user WHERE email='$emailogged'"; // recupere l'id de l'user connecté en cours dans un tableau associatif
+  $donne = $mysqlConnection->prepare($sqlQuery);
+  $donne->execute();
+  $resultat = $donne->fetchAll();
+  
+  $iduser=$resultat[0]['idUser'] ;// recupere l'id de l'user en
+
+  $shopname=mysqli_real_escape_string($db,$_POST['shopname']);
+  $shopetype=mysqli_real_escape_string($db,$_POST['shoptype']);
+
+  
+  
+ if (empty($shopetype)) {
+    array_push($errors, "le type est requis");
+ }
+
+ 
+ if (count($errors) == 0) {
+  echo "je rentre dans le if";
+  $query= "INSERT INTO shop (name, type, id_User)
+          VALUES('$shopname', '$shoptype', $iduser)";
+
+  $result=mysqli_query($db, $query);
+
+  if (!$result) {
+    echo("Error description: " . mysqli_error($db));
+  }
+
+ }
+
+}

@@ -33,9 +33,6 @@
 </div>
 
 
-
-
-?>
 <!-- Modal inscription -->
 <div class="modal fade" id="modalInscription1" aria-hidden="true" aria-labelledby="ModalToggleLabel2" tabindex="-1">
   <div class="modal-dialog modal-dialog-scrollable">
@@ -117,7 +114,7 @@
 
 
 
-<!-- Modal -->
+<!-- Modal mon échoppe -->
 <div class="modal fade" id="modalshop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -126,17 +123,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+      <form method="post">
+      <div class="mb-3">
+        <label for="adresse" class="form-label">Nom de votre commerce (facultatif)</label>
+        <input type="text" class="form-control" name="shopname">
+      </div>
+      <div class="mb-3">
+        <label for="adresse" class="form-label">type de votre commerce</label>
+        <input type="text" class="form-control" name="shoptype">
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary" name="validshopname" data-bs-dismiss="modal">Valider</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
 
 
 
-
-<?php var_dump($_POST); ?>
