@@ -11,8 +11,8 @@
   <body>
 <header>
 <?php
-require_once('header.php');
-require_once('modaleconnexion.php');
+include('header.php');
+include('modaleconnexion.php');
 ?>
 </header>
 <main>
