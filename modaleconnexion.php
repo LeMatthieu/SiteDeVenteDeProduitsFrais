@@ -1,9 +1,5 @@
 <?php include('register.php');
 
-
-$myshopcreated="";
-
-
 ?>
 <!-- Modal connexion -->
 <div class="modal fade" id="modalConnection" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -28,11 +24,11 @@ $myshopcreated="";
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-success" name="login" data-bs-dismiss="modal">Connexion</button>
+        <button type="submit" class="btn btn-success" name="login">Connexion</button>
       </div>
       </form>
+      <?php include('error.php'); ?>
       </div>
-
     </div>
   </div>
 </div>
@@ -86,26 +82,6 @@ $myshopcreated="";
         <label for="adresse" class="form-label">numero de telephone</label>
         <input type="number" class="form-control" name="PhoneNumber">
         </div>
-        <!-- <div class="mb-3">
-        <label for="adresse" class="form-label">Nom de votre commerce(facultatif)</label>
-        <input type="text" class="form-control" name="shopname">
-        </div>
-        <div class="mb-3">
-        <label for="adresse" class="form-label">Adresse de votre commerce</label>
-        <input type="text" class="form-control" name="shopadress">
-        </div>
-        <div class="mb-3">
-        <label for="adresse" class="form-label">Ville de votre commerce</label>
-        <input type="text" class="form-control" name="shopcity">
-        </div>
-        <div class="mb-3">
-        <label for="adresse" class="form-label">code postal de votre commerce</label>
-        <input type="number" class="form-control" name="CPshop">
-        </div>
-        <div class="mb-3">
-        <label for="adresse" class="form-label">Type de commerce</label>
-        <input type="text" class="form-control" name="shoptype">
-        </div> -->
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" data-bs-target="#modalConnection" data-bs-toggle="modal" data-bs-dismiss="modal">Retour</button>
@@ -131,7 +107,7 @@ $myshopcreated="";
                 </div>
                 <div class="modal-body">
                   <h3>Mes infos personelles</h3>
-                  <p>Nom : <?php echo($_SESSION['myfname']); ?></p>
+                  <p>Nom : <?php echo($_SESSION['myfname']);?></p>
                   <p>Prénom : <?php echo($_SESSION['mylname']); ?></p>
                   <p>Email : <?php echo($_SESSION['username']); ?></p> 
                   <p>Mot de passe : <?php echo($_SESSION['mypassword']); ?></p>
@@ -140,11 +116,16 @@ $myshopcreated="";
                   <p>Code postal : <?php echo($_SESSION['mypostalcode']); ?></p>
                   <p>Numéro de téléphone : <?php echo($_SESSION['myphonenumber']); ?></p>
                   <p>Date de naissance : <?php echo($_SESSION['mybirthdate']); ?></p>
-                  <h3>Nom de votre commerce : <?php echo($_SESSION['myshopname']); ?></h3>
+                  <h3>Votre commerce :</h3>
+                  <p>nom de votre commerce :  <?php echo($_SESSION['myshopname']); ?></p>
                   <p>Type de votre commerce : <?php echo($_SESSION['myshoptype']); ?> </p>
                   <p>Adresse de votre commerce :<?php echo($_SESSION['myshopadress']); ?> </p>
                   <p>Ville de votre commerce : <?php echo($_SESSION['myshopcity']); ?></p>
                   <p>Code postal de votre commerce : <?php echo($_SESSION['myshopcp']); ?></p>
+                  <form method="post">
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" name="deleteshop">Supprimer mon commerce</button>
+                  </form>
+                  
               </div>
             </div>
           </div>
@@ -201,6 +182,7 @@ $myshopcreated="";
                   <button type="submit" class="btn btn-primary" name="validshopname" data-bs-dismiss="modal">Valider</button>
                 </div>
                 </form>
+                <?php include('error.php'); ?>
               </div>
             </div>
           </div>

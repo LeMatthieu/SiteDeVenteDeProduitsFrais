@@ -18,6 +18,7 @@ include('modaleconnexion.php');
 </header>
 <main>
 <div class="container-fluid bgimage">
+ <?php include('error.php'); ?>  <!-- à inclure dans toutes les page pour afficher les erreur lorsqu'on essaye de remplir les formulaire dans les modal -->
 <div class="row"> 
   <div class="col-12 col-md-6 d-flex align-items-center justify-content-center"> <!-- d-flex pour utiliser l'alignement, aligns-center pour centrer les elements enfant(sur axe y) et -->
     <div class="w-75 m-5"> <!-- cette div permet de regrouper les element de mon contenu en display block (comportement par defaut) pour manipuler les 3 balises en meme temps avec la div parent et les flexbox-->

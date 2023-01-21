@@ -97,10 +97,10 @@ if (isset($_POST['register'])) {
     $password = mysqli_real_escape_string($db, $_POST['inputMDP']);
   
     if (empty($email)) {
-       array_push($errors, "Username is required");
+       array_push($errors, "Le nom d'utilisateur est requis pour se connecter ");
     }
     if (empty($password)) {
-       array_push($errors, "Password is required");
+       array_push($errors, "Le mot de passe est requis pour se connecter");
     }
   
     if (count($errors) == 0) {
@@ -124,27 +124,12 @@ if (isset($_POST['register'])) {
          $_SESSION['mypostalcode']=$resultatall[0]['postalcode'];
          $_SESSION['myphonenumber']=$resultatall[0]['phonenumber'];
          $_SESSION['mybirthdate']=$resultatall[0]['birthdate'];
-         $sqlQuery = "SELECT * FROM shop WHERE id_User=$iduser"; // recupere les données du magasin associé a l'id de l'utilisateur en cours 
-         $donne = $mysqlConnection->prepare($sqlQuery);
-         $donne->execute();
-         $resultat = $donne->fetchAll();
-         //echo($resultatall);
 
-         if(count($resultat)==0){
-         $_SESSION['myshopexist'] = false;
-         }
-         else{
-          $_SESSION['myshopexist'] = true;
-          $_SESSION['myshopname'] = $resultat[0]['name'];
-          $_SESSION['myshoptype'] = $resultat[0]['type'];
-          $_SESSION['myshopadress'] = $resultat[0]['shopadress'];
-          $_SESSION['myshopcity'] = $resultat[0]['shopcity'];
-          $_SESSION['myshopcp'] = $resultat[0]['shopcp'];
-         
-         }
+         // on verifie si l'user a un commerce associé a la connexion 
+          include('getshopdata.php');
          header('location:index.php');
        }else {
-          array_push($errors, "Wrong username/password combination");
+          array_push($errors, "Le mot de passe ou l'email que vous avez entré est incorrect");
        }
     }
   }
@@ -187,6 +172,29 @@ if (empty($shopcp)) {
           VALUES('$shopname', '$shoptype', '$iduser', '$shopadress', '$shopcity', '$shopcp')";
 
   $result=mysqli_query($db, $query);
+
+
+  // apres avoir creer son commerce, on recupere les data de celui ci pour les mettre dans la session en cours (sinon obligé de se reconnecter pour mettre a jour les data si 
+  //on fait ca que dans le login)
+  $sqlQuery = "SELECT * FROM shop WHERE id_User=$iduser"; // recupere les données du magasin associé a l'id de l'utilisateur en cours 
+  $donne = $mysqlConnection->prepare($sqlQuery);
+  $donne->execute();
+  $resultat = $donne->fetchAll();
+  //echo($resultatall);
+
+  if(count($resultat)==0){
+  $_SESSION['myshopexist'] = false;
+  }
+  else{
+   $_SESSION['myshopexist'] = true;
+   $_SESSION['myshopname'] = $resultat[0]['name'];
+   $_SESSION['myshoptype'] = $resultat[0]['type'];
+   $_SESSION['myshopadress'] = $resultat[0]['shopadress'];
+   $_SESSION['myshopcity'] = $resultat[0]['shopcity'];
+   $_SESSION['myshopcp'] = $resultat[0]['shopcp'];
+  
+  }
+
   header('location:index.php');
 
   if (!$result) {
@@ -198,7 +206,25 @@ if (empty($shopcp)) {
 
 }
 
+if (isset($_POST['deleteshop'])) {
 
+  include('getuserdata.php');
+  
+  $sqlQuery = "DELETE FROM shop WHERE id_User=$iduser"; // supprime le magasin associé a l'utilisateur connecté
+  $donne = $mysqlConnection->prepare($sqlQuery);
+  if($donne->execute()){
+    
+
+    include('getshopdata.php');
+    
+    }
+  else
+  {
+    print_r($donne->errorInfo()); 
+  }
+  header('location:index.php');
+
+}
 
 
 

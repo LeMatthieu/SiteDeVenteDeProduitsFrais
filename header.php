@@ -43,6 +43,7 @@
         <?php
     } else {
         //NAVBAR QUAND ON EST DECO
+        
         ?>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-row justify-content-end">
       <div class="container-fluid">
@@ -74,6 +75,7 @@
         
     </div>
   </div>
+  
 </nav>
         <?php
     }

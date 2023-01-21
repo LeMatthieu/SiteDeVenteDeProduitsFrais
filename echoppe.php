@@ -17,6 +17,7 @@ require_once('modaleconnexion.php');
 </header>
 
 <div class="container-fluid bgimage ">
+<?php include('error.php'); ?>
     <div class="d-flex justify-content-center">
     <h2 class="bg-warning text-white text-center p-2 m-2 rounded">Envie de trouver une échoppe à proximité pour des produits frais ?</h1>
     </div>
