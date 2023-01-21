@@ -4,6 +4,7 @@
     
     if (isset($_SESSION["loggedin"]) && ($_SESSION["loggedin"] == TRUE)) {
         //NAV BAR QUAND ON EST CO
+        
         ?>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-row justify-content-end">
         <div class="container-fluid">

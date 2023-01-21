@@ -13,6 +13,7 @@
 <?php
 include('header.php');
 include('modaleconnexion.php');
+
 ?>
 </header>
 <main>
@@ -21,10 +22,9 @@ include('modaleconnexion.php');
   <div class="col-12 col-md-6 d-flex align-items-center justify-content-center"> <!-- d-flex pour utiliser l'alignement, aligns-center pour centrer les elements enfant(sur axe y) et -->
     <div class="w-75 m-5"> <!-- cette div permet de regrouper les element de mon contenu en display block (comportement par defaut) pour manipuler les 3 balises en meme temps avec la div parent et les flexbox-->
     <h1 class="text-white fs-1 fw-bold text-center bg-warning rounded text-center"> Mangez frais et soutenez vos producteurs locaux  </h1>
-    <p class="text-white fs-3 text-center"> Commencez par entré une adresse pour voir les points de vente à proximité :   </p>
+    <p class="text-white fs-3 text-center"> Cliqué sur se bouton pour afficher TOUS les commerces enregistré dans la zone </p>
     <form class="d-flex rounded ms-5 me-5">
-        <input class="form-control" type="search" placeholder="123 rue de l'exemple, Marseille 13000">
-        <button class="btn btn-success ms-3" type="submit">Rechercher</button>
+        <button class="btn btn-success m-auto" type="submit">Trouver un commerce</button>
       </form>
     </div>
   </div>

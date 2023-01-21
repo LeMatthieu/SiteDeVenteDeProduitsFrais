@@ -114,7 +114,34 @@ if (isset($_POST['register'])) {
        if (mysqli_num_rows($results) == 1) {
          $_SESSION['username'] = $email;
          $emailogged=$_SESSION['username'];
-         $_SESSION['loggedin'] = true;
+         $_SESSION['loggedin'] = true;      
+         include('getuserdata.php');
+         $_SESSION['myfname']=$resultatall[0]['firstname'];
+         $_SESSION['mylname']=$resultatall[0]['lastname'];
+         $_SESSION['mypassword']=$resultatall[0]['password'];
+         $_SESSION['myadress']=$resultatall[0]['adress'];
+         $_SESSION['mycity']=$resultatall[0]['city'];
+         $_SESSION['mypostalcode']=$resultatall[0]['postalcode'];
+         $_SESSION['myphonenumber']=$resultatall[0]['phonenumber'];
+         $_SESSION['mybirthdate']=$resultatall[0]['birthdate'];
+         $sqlQuery = "SELECT * FROM shop WHERE id_User=$iduser"; // recupere les données du magasin associé a l'id de l'utilisateur en cours 
+         $donne = $mysqlConnection->prepare($sqlQuery);
+         $donne->execute();
+         $resultat = $donne->fetchAll();
+         //echo($resultatall);
+
+         if(count($resultat)==0){
+         $_SESSION['myshopexist'] = false;
+         }
+         else{
+          $_SESSION['myshopexist'] = true;
+          $_SESSION['myshopname'] = $resultat[0]['name'];
+          $_SESSION['myshoptype'] = $resultat[0]['type'];
+          $_SESSION['myshopadress'] = $resultat[0]['shopadress'];
+          $_SESSION['myshopcity'] = $resultat[0]['shopcity'];
+          $_SESSION['myshopcp'] = $resultat[0]['shopcp'];
+         
+         }
          header('location:index.php');
        }else {
           array_push($errors, "Wrong username/password combination");
@@ -130,37 +157,51 @@ if (isset($_POST['register'])) {
 
 // var_dump($_POST['validshopname']);
 
+
+//créer son échoppe
 if (isset($_POST['validshopname'])) {
   
-  $emailogged=$_SESSION['username']; //associe la variable a l'username de $_session (qui correspond à email)
-  $sqlQuery = "SELECT idUser FROM user WHERE email='$emailogged'"; // recupere l'id de l'user connecté en cours dans un tableau associatif
-  $donne = $mysqlConnection->prepare($sqlQuery);
-  $donne->execute();
-  $resultat = $donne->fetchAll();
-  
-  $iduser=$resultat[0]['idUser'] ;// recupere l'id de l'user en
-
+  include('getuserdata.php');
   $shopname=mysqli_real_escape_string($db,$_POST['shopname']);
-  $shopetype=mysqli_real_escape_string($db,$_POST['shoptype']);
-
-  
-  
- if (empty($shopetype)) {
+  $shoptype=mysqli_real_escape_string($db,$_POST['shoptype']);
+  $shopadress=mysqli_real_escape_string($db,$_POST['shopadress']);
+  $shopcity=mysqli_real_escape_string($db,$_POST['shopcity']);
+  $shopcp=mysqli_real_escape_string($db,$_POST['shopcp']);
+ if (empty($shoptype)) {
     array_push($errors, "le type est requis");
  }
+ if (empty($shopadress)) {
+  array_push($errors, "l'adress est requise");
+}
+if (empty($shopcity)) {
+  array_push($errors, "la ville est requise");
+}
+if (empty($shopcp)) {
+  array_push($errors, "le CP est requis");
+}
 
  
  if (count($errors) == 0) {
   echo "je rentre dans le if";
-  $query= "INSERT INTO shop (name, type, id_User)
-          VALUES('$shopname', '$shoptype', $iduser)";
+  $query= "INSERT INTO shop (name, type, id_User, shopadress, shopcity, shopcp)
+          VALUES('$shopname', '$shoptype', '$iduser', '$shopadress', '$shopcity', '$shopcp')";
 
   $result=mysqli_query($db, $query);
+  header('location:index.php');
 
   if (!$result) {
+    //var_dump($_SESSION['myshopname']);
     echo("Error description: " . mysqli_error($db));
   }
 
  }
 
 }
+
+
+
+
+
+
+// $_SESSION['myshop']=$resultat;
+
