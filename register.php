@@ -157,7 +157,7 @@ if (empty($shopcp)) {
 
  
  if (count($errors) == 0) {
-  echo "je rentre dans le if";
+  //echo "je rentre dans le if";
   $query= "INSERT INTO shop (name, type, id_User, shopadress, shopcity, shopcp)
           VALUES('$shopname', '$shoptype', '$iduser', '$shopadress', '$shopcity', '$shopcp')";
 
@@ -244,22 +244,27 @@ if (isset($_POST['updateprofilenoshop'])) {
   if (empty($phonenumber)) { array_push($errors, "Le numéro de téléphobe est requis"); }
   if (empty($birthdate)) { array_push($errors, "La date de naissance est requise"); }
 
-
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
   $user_check_query = "SELECT * FROM user WHERE email='$email' OR phonenumber='$phonenumber' LIMIT 1";
   $result = mysqli_query($db, $user_check_query);
   $user = mysqli_fetch_assoc($result);
 
-  if($email != $_SESSION['username']){
+  if($email != $_SESSION['username'] ){
   if ($user) { // if user exists
     if ($user['email'] === $email) {
       array_push($errors, "L'adresse email existe déjà");
     }
+  }
+}
+
+if($phonenumber != $_SESSION['myphonenumber']){
+  if ($user) {
     if ($user['phonenumber'] === $phonenumber) {
-      array_push($errors, "Le numéro de téléphone existe déjà");
+      array_push($errors, "Le numéro de téléphone est deja associé à un compte");
     }
   }
+
 }
   //var_dump($errors);
   // Finally, register user if there are no errors in the form
@@ -286,5 +291,115 @@ if (isset($_POST['updateprofilenoshop'])) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+//mis a jour de son profil si on a une boutique
+if (isset($_POST['updateprofil'])) {
+  include('getuserdata.php');
+  $firstname= mysqli_real_escape_string($db,$_POST['editfname']);
+  $lastname = mysqli_real_escape_string($db,$_POST['editlname']);
+  $password = mysqli_real_escape_string($db,$_POST['editpassword']);
+  $email = mysqli_real_escape_string($db,$_POST['editmail']);
+  $birthdate = mysqli_real_escape_string($db,$_POST['editbirth']);
+  $adress = mysqli_real_escape_string($db,$_POST['editadress']);
+  $city = mysqli_real_escape_string($db,$_POST['editcity']);
+  $postalcode = mysqli_real_escape_string($db,$_POST['editcp']);
+  $phonenumber = mysqli_real_escape_string($db,$_POST['editphone']);
+
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($firstname)) { array_push($errors, "Le prenom est requis"); }
+  if (empty($lastname)) { array_push($errors, "Le nom est requis"); }
+  if (empty($email)) { array_push($errors, "L'email est requis"); }
+  if (empty($password)) { array_push($errors, "le mot de passe est requis"); }
+  if (empty($adress)) { array_push($errors, "L'adresse est requise"); }
+  if (empty($city)) { array_push($errors, "La ville est requise"); }
+  if (empty($postalcode)) { array_push($errors, "le code postal est requis"); }
+  if (empty($phonenumber)) { array_push($errors, "Le numéro de téléphobe est requis"); }
+  if (empty($birthdate)) { array_push($errors, "La date de naissance est requise"); }
+
+  $shopname=mysqli_real_escape_string($db,$_POST['editshopname']);
+  $shoptype=mysqli_real_escape_string($db,$_POST['editshoptype']);
+  $shopadress=mysqli_real_escape_string($db,$_POST['editshopadress']);
+  $shopcity=mysqli_real_escape_string($db,$_POST['editshopcity']);
+  $shopcp=mysqli_real_escape_string($db,$_POST['editshopcp']);
+ if (empty($shoptype)) {
+    array_push($errors, "le type est requis");
+ }
+ if (empty($shopadress)) {
+  array_push($errors, "l'adress est requise");
+}
+if (empty($shopcity)) {
+  array_push($errors, "la ville est requise");
+}
+if (empty($shopcp)) {
+  array_push($errors, "le CP est requis");
+}
+
+  // first check the database to make sure 
+  // a user does not already exist with the same username and/or email
+  $user_check_query = "SELECT * FROM user WHERE email='$email' OR phonenumber='$phonenumber' LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+
+  if($email != $_SESSION['username'] ){
+    if ($user) { // if user exists
+      if ($user['email'] === $email) {
+        array_push($errors, "L'adresse email existe déjà");
+      }
+    }
+  }
+  
+  if($phonenumber != $_SESSION['myphonenumber']){
+    if ($user) {
+      if ($user['phonenumber'] === $phonenumber) {
+        array_push($errors, "Le numéro de téléphone est deja associé à un compte");
+      }
+    }
+  
+  }
+  //var_dump($errors);
+  // Finally, register user if there are no errors in the form
+  
+
+  if (count($errors) == 0) {
+
+      $query = "UPDATE shop SET name='$shopname', type='$shoptype',  shopadress='$shopadress', shopcity='$shopcity', shopcp='$shopcp'
+       WHERE id_User=$iduser;";
+      $result=mysqli_query($db, $query);
+      if (!$result) {
+        echo("Error description: " . mysqli_error($db));
+      }
+      
+      include('getshopdata.php'); //recupere les info du shop concernant l'user en cours et les met à jour dans le cache
+
+      $query = "UPDATE user SET firstname='$firstname', lastname='$lastname',  password='$password', email='$email', adress='$adress',
+       city='$city',postalcode='$postalcode', phonenumber='$phonenumber', birthdate='$birthdate' WHERE idUser=$iduser;";
+      //var_dump( $query);
+      $result=mysqli_query($db, $query);
+      include('getuserdata.php'); //recupere les info de la db.
+      $_SESSION['myfname']=$resultatall[0]['firstname'];
+      $_SESSION['mylname']=$resultatall[0]['lastname'];
+      $_SESSION['mypassword']=$resultatall[0]['password'];
+      $_SESSION['myadress']=$resultatall[0]['adress'];
+      $_SESSION['mycity']=$resultatall[0]['city'];
+      $_SESSION['mypostalcode']=$resultatall[0]['postalcode'];
+      $_SESSION['myphonenumber']=$resultatall[0]['phonenumber'];
+      $_SESSION['mybirthdate']=$resultatall[0]['birthdate'];
+    // Perform a query, check for error
+    if (!$result) {
+    echo("Error description: " . mysqli_error($db));
+    }
+  }
+}
 // $_SESSION['myshop']=$resultat;
 

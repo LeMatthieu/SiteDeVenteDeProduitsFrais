@@ -70,18 +70,18 @@ require_once('modaleconnexion.php');
 <div class="container-fluid my-5">
     <div class="row">
         <div class="col-12 col-md-6 mt-5">
-        <p class="text-warning fw-bold fs-2 text-center">Entrez votre adresse pour trouver les horaire du marché de votre ville et les échoppes généralement présente : </p>
-        <form class="d-flex rounded ms-5 me-5 mt-5">
-        <input class="form-control" type="search" placeholder="123 rue de l'exemple, Marseille 13000">
-        <button class="btn btn-success ms-3" type="submit">Rechercher</button>
+        <p class="text-black fs-3 text-center"> Cliqué sur se bouton pour afficher tous les commerces enregistré </p>
+        <p class="d-flex rounded ms-5 me-5">
+        <button class="btn btn-success m-auto" type="button" name="findshop"  onclick="showDiv()">Afficher les commerces</button>
+      </p>
+      <p class="text-black fs-5 ms-5  "id='listecommerce' style="display:none;"><?php include('getalldata.php'); ?></p>
       </form>
         </div>
     
     <div class="col-12 col-md-6 mt-5">
     <p class="text-warning fw-bold fs-2 text-center">En voyage dans une autre commune et envie de faire un tour au marché local ? </p>
     <p class="fs-5">Les marché sont organisé le weekend ou le mercredi, mais cela depend de la communne. <br>
-     Grâce à notre site vous pourrez trouver tout les horaires des marché de la plupart des communes de France, 
-     et même quelles échoppes seront présentent !
+     Grâce à notre site vous pourrez trouver la liste des échoppes présentent dans les marché de la plupart des communes de France.
     </p>
     </div>
     </div>
@@ -94,6 +94,7 @@ require_once('modaleconnexion.php');
 require_once('footer.php');
 ?>
 </footer>
+<script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

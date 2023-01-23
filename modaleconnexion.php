@@ -23,7 +23,8 @@
     <a class ="link-primary" data-bs-target="#modalInscription1" data-bs-toggle="modal" data-bs-dismiss="modal">Pas de compte ? inscrivez vous !</a>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      <!-- Meme si on submit rien, cela permet d'acutaliser la page et de faire disparaitre les erreur quand on clique sur fermer -->
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> 
         <button type="submit" class="btn btn-success" name="login">Connexion</button>
       </div>
       </form>
@@ -84,14 +85,16 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#modalConnection" data-bs-toggle="modal" data-bs-dismiss="modal">Retour</button>
+        <button type="submit" class="btn btn-primary" data-bs-target="#modalConnection" data-bs-toggle="modal" data-bs-dismiss="modal">Retour</button>
         <button type="submit" class="btn btn-success" name="register" data-bs-dismiss="modal">S'enregistrer</button>
       </div>
       </form>
+      <?php include('error.php'); ?>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <!-- Modal editprofile -->
@@ -119,12 +122,12 @@
       <p>Type de votre commerce : <input type="text" name="editshoptype" value="<?php echo($_SESSION['myshoptype']);?>"></p>
       <p>Adresse de votre commerce : <input type="text" name="editshopadress" value="<?php echo($_SESSION['myshopadress']);?>"> </p>
       <p>Ville de votre commerce : <input type="text" name="editshopcity" value="<?php echo($_SESSION['myshopcity']);?>"></p>
-      <p>Code postal de votre commerce : <input type="number" name="editshopadress" value="<?php echo($_SESSION['myshopcp']);?>"></p>
+      <p>Code postal de votre commerce : <input type="number" name="editshopcp" value="<?php echo($_SESSION['myshopcp']);?>"></p>
 
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-success" name="updateprofile">Valider les changements</button>
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-success" name="updateprofil">Valider les changements</button>
       </div>
       </form>
       <?php include('error.php'); ?>
@@ -154,7 +157,7 @@
       <p>Numéro de téléphone : <input type="number" name="editphone" value="<?php echo($_SESSION['myphonenumber']);?>"></p>
       <p>Date de naissance : <input type="date" name="editbirth" value="<?php echo($_SESSION['mybirthdate']);?>"></p>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         <button type="submit" class="btn btn-success" name="updateprofilenoshop">Valider les changements</button>
       </div>
       </form>
