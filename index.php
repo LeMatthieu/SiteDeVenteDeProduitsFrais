@@ -25,7 +25,7 @@ include('modaleconnexion.php');
     <h1 class="text-white fs-1 fw-bold text-center bg-warning rounded text-center"> Mangez frais et soutenez vos producteurs locaux  </h1>
     <p class="text-white fs-3 text-center"> Cliqué sur se bouton pour afficher TOUS les commerces enregistré dans la zone </p>
     <form class="d-flex rounded ms-5 me-5">
-        <button class="btn btn-success m-auto" type="submit">Trouver un commerce</button>
+        <button class="btn btn-success m-auto" type="submit" name="findshop">Trouver un commerce</button>
       </form>
     </div>
   </div>

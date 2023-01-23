@@ -35,12 +35,6 @@ if (isset($_POST['register'])) {
     $postalcode = mysqli_real_escape_string($db,$_POST['postalcode']);
     $phonenumber = mysqli_real_escape_string($db,$_POST['PhoneNumber']);
 
-    // $shopadress = mysqli_real_escape_string($db,$_POST['shopadress']);
-    // $shopcity = mysqli_real_escape_string($db,$_POST['shopcity']);
-    // $shopname = mysqli_real_escape_string($db,$_POST['shopname']);
-    // $shopCP = mysqli_real_escape_string($db,$_POST['CPshop']);
-    // $shoptype = mysqli_real_escape_string($db,$_POST['shoptype']);
-
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
     if (empty($firstname)) { array_push($errors, "Le prenom est requis"); }
@@ -53,10 +47,6 @@ if (isset($_POST['register'])) {
     if (empty($phonenumber)) { array_push($errors, "Le numéro de téléphobe est requis"); }
     if (empty($birthdate)) { array_push($errors, "La date de naissance est requise"); }
 
-    // if (empty($shopadress)) { array_push($errors, "L'adresse de votre commerce est requise"); }
-    // if (empty($shopCP)) { array_push($errors, "Le code postal de votre commerce est requis"); }
-    // if (empty($shopcity)) { array_push($errors, "La ville de votre commerce est requis"); }
-    // if (empty($shoptype)) { array_push($errors, "Le type de votre comemrcre est requis"); }
 
     // first check the database to make sure 
     // a user does not already exist with the same username and/or email
@@ -206,6 +196,8 @@ if (empty($shopcp)) {
 
 }
 
+
+//supprimer son echoppe
 if (isset($_POST['deleteshop'])) {
 
   include('getuserdata.php');
@@ -227,7 +219,72 @@ if (isset($_POST['deleteshop'])) {
 }
 
 
+//mis a jour de son profil si on a pas de boutique 
+if (isset($_POST['updateprofilenoshop'])) {
+  include('getuserdata.php');
+  $firstname= mysqli_real_escape_string($db,$_POST['editfname']);
+  $lastname = mysqli_real_escape_string($db,$_POST['editlname']);
+  $password = mysqli_real_escape_string($db,$_POST['editpassword']);
+  $email = mysqli_real_escape_string($db,$_POST['editmail']);
+  $birthdate = mysqli_real_escape_string($db,$_POST['editbirth']);
+  $adress = mysqli_real_escape_string($db,$_POST['editadress']);
+  $city = mysqli_real_escape_string($db,$_POST['editcity']);
+  $postalcode = mysqli_real_escape_string($db,$_POST['editcp']);
+  $phonenumber = mysqli_real_escape_string($db,$_POST['editphone']);
 
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($firstname)) { array_push($errors, "Le prenom est requis"); }
+  if (empty($lastname)) { array_push($errors, "Le nom est requis"); }
+  if (empty($email)) { array_push($errors, "L'email est requis"); }
+  if (empty($password)) { array_push($errors, "le mot de passe est requis"); }
+  if (empty($adress)) { array_push($errors, "L'adresse est requise"); }
+  if (empty($city)) { array_push($errors, "La ville est requise"); }
+  if (empty($postalcode)) { array_push($errors, "le code postal est requis"); }
+  if (empty($phonenumber)) { array_push($errors, "Le numéro de téléphobe est requis"); }
+  if (empty($birthdate)) { array_push($errors, "La date de naissance est requise"); }
+
+
+  // first check the database to make sure 
+  // a user does not already exist with the same username and/or email
+  $user_check_query = "SELECT * FROM user WHERE email='$email' OR phonenumber='$phonenumber' LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+
+  if($email != $_SESSION['username']){
+  if ($user) { // if user exists
+    if ($user['email'] === $email) {
+      array_push($errors, "L'adresse email existe déjà");
+    }
+    if ($user['phonenumber'] === $phonenumber) {
+      array_push($errors, "Le numéro de téléphone existe déjà");
+    }
+  }
+}
+  //var_dump($errors);
+  // Finally, register user if there are no errors in the form
+  
+
+  if (count($errors) == 0) {
+      $query = "UPDATE user SET firstname='$firstname', lastname='$lastname',  password='$password', email='$email', adress='$adress',
+       city='$city',postalcode='$postalcode', phonenumber='$phonenumber', birthdate='$birthdate' WHERE idUser=$iduser;";
+      //var_dump( $query);
+      $result=mysqli_query($db, $query);
+      include('getuserdata.php');
+      $_SESSION['myfname']=$resultatall[0]['firstname'];
+      $_SESSION['mylname']=$resultatall[0]['lastname'];
+      $_SESSION['mypassword']=$resultatall[0]['password'];
+      $_SESSION['myadress']=$resultatall[0]['adress'];
+      $_SESSION['mycity']=$resultatall[0]['city'];
+      $_SESSION['mypostalcode']=$resultatall[0]['postalcode'];
+      $_SESSION['myphonenumber']=$resultatall[0]['phonenumber'];
+      $_SESSION['mybirthdate']=$resultatall[0]['birthdate'];
+    // Perform a query, check for error
+    if (!$result) {
+    echo("Error description: " . mysqli_error($db));
+    }
+  }
+}
 
 // $_SESSION['myshop']=$resultat;
 

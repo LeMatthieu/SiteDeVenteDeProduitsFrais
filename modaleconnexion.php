@@ -94,6 +94,80 @@
 </div>
 
 
+<!-- Modal editprofile -->
+<div class="modal fade" id="modaleditprofile" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mon profil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="post">   <!-- action permet d'appeller le fichier -->
+      <h3>Mes infos personelles</h3>
+      <p>Nom : <input type="text" name="editlname" value="<?php echo($_SESSION['mylname']);?>"> </p>
+      <p>Prénom : <input type="text" name="editfname" value="<?php echo($_SESSION['myfname']);?>"></p>
+      <p>Email : <input type="text" name="editmail" value="<?php echo($_SESSION['username']);?>"></p> 
+      <p>Mot de passe : <input type="text" name="editpassword" value="<?php echo($_SESSION['mypassword']);?>"></p>
+      <p>Adresse : <input type="text" name="editadress" value="<?php echo($_SESSION['myadress']);?>"></p>
+      <p>Ville : <input type="text" name="editcity" value="<?php echo($_SESSION['mycity']);?>"></p>
+      <p>Code postal : <input type="number" name="editcp" value="<?php echo($_SESSION['mypostalcode']);?>"></p>
+      <p>Numéro de téléphone : <input type="number" name="editphone" value="<?php echo($_SESSION['myphonenumber']);?>"></p>
+      <p>Date de naissance : <input type="date" name="editbirth" value="<?php echo($_SESSION['mybirthdate']);?>"></p>
+      <h3>Votre commerce :</h3>
+      <p>nom de votre commerce :  <input type="text" name="editshopname" value="<?php echo($_SESSION['myshopname']);?>"></p>
+      <p>Type de votre commerce : <input type="text" name="editshoptype" value="<?php echo($_SESSION['myshoptype']);?>"></p>
+      <p>Adresse de votre commerce : <input type="text" name="editshopadress" value="<?php echo($_SESSION['myshopadress']);?>"> </p>
+      <p>Ville de votre commerce : <input type="text" name="editshopcity" value="<?php echo($_SESSION['myshopcity']);?>"></p>
+      <p>Code postal de votre commerce : <input type="number" name="editshopadress" value="<?php echo($_SESSION['myshopcp']);?>"></p>
+
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-success" name="updateprofile">Valider les changements</button>
+      </div>
+      </form>
+      <?php include('error.php'); ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editprofile si on a pas de commerce -->
+<div class="modal fade" id="modaleditprofilenoshop" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mon profil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="post">   <!-- action permet d'appeller le fichier -->
+      <h3>Mes infos personelles</h3>
+      <p>Nom : <input type="text" name="editlname" value="<?php echo($_SESSION['mylname']);?>"> </p>
+      <p>Prénom : <input type="text" name="editfname" value="<?php echo($_SESSION['myfname']);?>"></p>
+      <p>Email : <input type="text" name="editmail" value="<?php echo($_SESSION['username']);?>"></p> 
+      <p>Mot de passe : <input type="text" name="editpassword" value="<?php echo($_SESSION['mypassword']);?>"></p>
+      <p>Adresse : <input type="text" name="editadress" value="<?php echo($_SESSION['myadress']);?>"></p>
+      <p>Ville : <input type="text" name="editcity" value="<?php echo($_SESSION['mycity']);?>"></p>
+      <p>Code postal : <input type="number" name="editcp" value="<?php echo($_SESSION['mypostalcode']);?>"></p>
+      <p>Numéro de téléphone : <input type="number" name="editphone" value="<?php echo($_SESSION['myphonenumber']);?>"></p>
+      <p>Date de naissance : <input type="date" name="editbirth" value="<?php echo($_SESSION['mybirthdate']);?>"></p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-success" name="updateprofilenoshop">Valider les changements</button>
+      </div>
+      </form>
+      <?php include('error.php'); ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <?php
     if (isset($_SESSION['myshopexist']) && ($_SESSION['myshopexist'] == TRUE)) {
         //modale quand on a creer notre echoppe
@@ -123,12 +197,14 @@
                   <p>Ville de votre commerce : <?php echo($_SESSION['myshopcity']); ?></p>
                   <p>Code postal de votre commerce : <?php echo($_SESSION['myshopcp']); ?></p>
                   <form method="post">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modaleditprofile" name="editprofile">Editer mon profil</button>
                   <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" name="deleteshop">Supprimer mon commerce</button>
-                  </form>
-                  
+                  </form>           
               </div>
             </div>
           </div>
+
+          
 
 
  <?php
@@ -145,8 +221,8 @@
                 </div>
                 <div class="modal-body">
                 <h3>Mes infos personelles</h3>
-                  <p>Nom : <?php echo($_SESSION['myfname']); ?></p>
-                  <p>Prénom : <?php echo($_SESSION['mylname']); ?></p>
+                  <p>Nom : <?php echo($_SESSION['mylname']); ?></p>
+                  <p>Prénom : <?php echo($_SESSION['myfname']); ?></p>
                   <p>Email : <?php echo($_SESSION['username']); ?></p> 
                   <p>Mot de passe : <?php echo($_SESSION['mypassword']); ?></p>
                   <p>Adresse : <?php echo($_SESSION['myadress']); ?></p>
@@ -178,8 +254,9 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                  <button type="submit" class="btn btn-primary" name="validshopname" data-bs-dismiss="modal">Valider</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modaleditprofilenoshop" name="editprofile">Editer mon profil</button>
+                  <button type="submit" class="btn btn-primary" name="validshopname" data-bs-dismiss="modal">Ajouter le commerce</button>
                 </div>
                 </form>
                 <?php include('error.php'); ?>
