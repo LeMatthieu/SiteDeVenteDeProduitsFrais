@@ -11,7 +11,7 @@ $birthdate="";
 $adress="";
 $city="";
 $postalcode=0;
-$phonenumber=0;
+$phonenumber="";
 
 $shopadress="";
 $shopname="";
@@ -19,6 +19,8 @@ $shopcity="";
 $shopCP=0;
 $shoptype="";
 $errors = array(); 
+$regexemail='/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD';
+$regexpassword= '/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/';
 
 //var_dump($phonenumber);
 // REGISTER USER
@@ -47,6 +49,23 @@ if (isset($_POST['register'])) {
     if (empty($phonenumber)) { array_push($errors, "Le numéro de téléphobe est requis"); }
     if (empty($birthdate)) { array_push($errors, "La date de naissance est requise"); }
 
+    if(preg_match($regexemail, $email)==false){
+      array_push($errors, "L'email est invalide");
+    }
+  
+   if(preg_match($regexpassword, $password)==false){
+    array_push($errors, "Le mot de passe est invalide");
+    }
+
+    if(!is_numeric($phonenumber)){
+      array_push($errors, "Le numéro de téléphone est invalide");
+    }
+
+    if(!is_numeric($postalcode)){
+      array_push($errors, "Le code postal est invalide");
+    }
+    
+
 
     // first check the database to make sure 
     // a user does not already exist with the same username and/or email
@@ -61,12 +80,10 @@ if (isset($_POST['register'])) {
       if ($user['phonenumber'] === $phonenumber) {
         array_push($errors, "Le numéro de téléphone existe déjà");
       }
-    }
-    
-    //var_dump($errors);
+    }  
+   
     // Finally, register user if there are no errors in the form
     
-
     if (count($errors) == 0) {
         $query = "INSERT INTO user (firstname, lastname, password, email, adress, city, postalcode, phonenumber, birthdate) 
                   VALUES('$firstname', '$lastname','$password', '$email', '$adress', '$city', '$postalcode', '$phonenumber', '$birthdate');";
@@ -205,8 +222,6 @@ if (isset($_POST['deleteshop'])) {
   $sqlQuery = "DELETE FROM shop WHERE id_User=$iduser"; // supprime le magasin associé a l'utilisateur connecté
   $donne = $mysqlConnection->prepare($sqlQuery);
   if($donne->execute()){
-    
-
     include('getshopdata.php');
     
     }
@@ -243,29 +258,41 @@ if (isset($_POST['updateprofilenoshop'])) {
   if (empty($postalcode)) { array_push($errors, "le code postal est requis"); }
   if (empty($phonenumber)) { array_push($errors, "Le numéro de téléphobe est requis"); }
   if (empty($birthdate)) { array_push($errors, "La date de naissance est requise"); }
-
-  // first check the database to make sure 
-  // a user does not already exist with the same username and/or email
-  $user_check_query = "SELECT * FROM user WHERE email='$email' OR phonenumber='$phonenumber' LIMIT 1";
-  $result = mysqli_query($db, $user_check_query);
-  $user = mysqli_fetch_assoc($result);
-
-  if($email != $_SESSION['username'] ){
-  if ($user) { // if user exists
-    if ($user['email'] === $email) {
-      array_push($errors, "L'adresse email existe déjà");
-    }
-  }
-}
-
-if($phonenumber != $_SESSION['myphonenumber']){
-  if ($user) {
-    if ($user['phonenumber'] === $phonenumber) {
-      array_push($errors, "Le numéro de téléphone est deja associé à un compte");
-    }
+  if(preg_match($regexemail, $email)==false){
+    array_push($errors, "L'email est invalide");
   }
 
-}
+ if(preg_match($regexpassword, $password)==false){
+  array_push($errors, "Le mot de passe est invalide");
+  }
+  if(!is_numeric($phonenumber)){
+    array_push($errors, "Le numéro de téléphone est invalide");
+  }
+
+  if(!is_numeric($postalcode)){
+    array_push($errors, "Le code postal est invalide");
+  }
+
+  if($email != $_SESSION['username']){
+    $user_check_query = "SELECT * FROM user WHERE email='$email' LIMIT 1";
+    $result = mysqli_query($db, $user_check_query);
+    $user = mysqli_fetch_assoc($result);
+    if ($user) { // if user exists
+      if ($user['email'] === $email) {
+        array_push($errors, "L'adresse email existe déjà");
+      }
+    }
+  }
+  if($phonenumber != $_SESSION['myphonenumber']){
+    $user_check_query = "SELECT * FROM user WHERE phonenumber='$phonenumber' LIMIT 1";
+    $result = mysqli_query($db, $user_check_query);
+    $user = mysqli_fetch_assoc($result);
+    if ($user) { // if user exists
+      if ($user['phonenumber'] === $phonenumber) {
+        array_push($errors, "Le numéro de téléphone existe déjà");
+      }
+    }
+  }
   //var_dump($errors);
   // Finally, register user if there are no errors in the form
   
@@ -275,6 +302,7 @@ if($phonenumber != $_SESSION['myphonenumber']){
        city='$city',postalcode='$postalcode', phonenumber='$phonenumber', birthdate='$birthdate' WHERE idUser=$iduser;";
       //var_dump( $query);
       $result=mysqli_query($db, $query);
+      $_SESSION['username']=$email;
       include('getuserdata.php');
       $_SESSION['myfname']=$resultatall[0]['firstname'];
       $_SESSION['mylname']=$resultatall[0]['lastname'];
@@ -290,14 +318,6 @@ if($phonenumber != $_SESSION['myphonenumber']){
     }
   }
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -344,37 +364,53 @@ if (empty($shopcity)) {
 if (empty($shopcp)) {
   array_push($errors, "le CP est requis");
 }
+if(preg_match($regexemail, $email)==false){
+  array_push($errors, "L'email est invalide");
+}
 
-  // first check the database to make sure 
-  // a user does not already exist with the same username and/or email
-  $user_check_query = "SELECT * FROM user WHERE email='$email' OR phonenumber='$phonenumber' LIMIT 1";
+if(preg_match($regexpassword, $password)==false){
+array_push($errors, "Le mot de passe est invalide");
+}
+
+if(!is_numeric($phonenumber)){
+  array_push($errors, "Le numéro de téléphone est invalide");
+}
+
+if(!is_numeric($postalcode)){
+  array_push($errors, "Le code postal est invalide");
+}
+
+if(!is_numeric($shopcp)){
+  array_push($errors, "Le code postal est invalide");
+}
+
+  if($email != $_SESSION['username']){
+  $user_check_query = "SELECT * FROM user WHERE email='$email' LIMIT 1";
   $result = mysqli_query($db, $user_check_query);
   $user = mysqli_fetch_assoc($result);
-
-  if($email != $_SESSION['username'] ){
-    if ($user) { // if user exists
-      if ($user['email'] === $email) {
-        array_push($errors, "L'adresse email existe déjà");
-      }
+  if ($user) { // if user exists
+    if ($user['email'] === $email) {
+      array_push($errors, "L'adresse email existe déjà");
     }
   }
-  
-  if($phonenumber != $_SESSION['myphonenumber']){
-    if ($user) {
-      if ($user['phonenumber'] === $phonenumber) {
-        array_push($errors, "Le numéro de téléphone est deja associé à un compte");
-      }
+}
+if($phonenumber != $_SESSION['myphonenumber']){
+  $user_check_query = "SELECT * FROM user WHERE phonenumber='$phonenumber' LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+  if ($user) { // if user exists
+    if ($user['phonenumber'] === $phonenumber) {
+      array_push($errors, "Le numéro de téléphone existe déjà");
     }
-  
   }
+}
   //var_dump($errors);
   // Finally, register user if there are no errors in the form
   
 
   if (count($errors) == 0) {
 
-      $query = "UPDATE shop SET name='$shopname', type='$shoptype',  shopadress='$shopadress', shopcity='$shopcity', shopcp='$shopcp'
-       WHERE id_User=$iduser;";
+      $query = "UPDATE shop SET name='$shopname', type='$shoptype', shopadress='$shopadress', shopcity='$shopcity', shopcp='$shopcp' WHERE id_User=$iduser;";
       $result=mysqli_query($db, $query);
       if (!$result) {
         echo("Error description: " . mysqli_error($db));
@@ -386,6 +422,7 @@ if (empty($shopcp)) {
        city='$city',postalcode='$postalcode', phonenumber='$phonenumber', birthdate='$birthdate' WHERE idUser=$iduser;";
       //var_dump( $query);
       $result=mysqli_query($db, $query);
+      $_SESSION['username']=$email;
       include('getuserdata.php'); //recupere les info de la db.
       $_SESSION['myfname']=$resultatall[0]['firstname'];
       $_SESSION['mylname']=$resultatall[0]['lastname'];
@@ -401,5 +438,3 @@ if (empty($shopcp)) {
     }
   }
 }
-// $_SESSION['myshop']=$resultat;
-
